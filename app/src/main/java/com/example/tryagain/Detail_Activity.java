@@ -88,6 +88,8 @@ public class Detail_Activity extends AppCompatActivity {
         user = auth.getCurrentUser();
 
 
+        mRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        product_intent = (Product) getIntent().getSerializableExtra("Product");
         StorageRef = FirebaseStorage.getInstance().getReference().child("ProfileImage");
 
         rcvCmt.setLayoutManager(new LinearLayoutManager(this));
@@ -95,7 +97,6 @@ public class Detail_Activity extends AppCompatActivity {
         mCommentList = new ArrayList<>();
         mCommentAdapter = new CommentAdapter(mCommentList);
         rcvCmt.setAdapter(mCommentAdapter);
-
 
         tv_detail_price.setText(String.format("%sđ", ConvertPriceToString(product_intent.getPrice())));
         Glide.with(this).load(product_intent.getImage()).into(imv_Product);
@@ -138,8 +139,6 @@ public class Detail_Activity extends AppCompatActivity {
             }
         });
 
-        mRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        product_intent = (Product) getIntent().getSerializableExtra("Product");
         btnSendCmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
