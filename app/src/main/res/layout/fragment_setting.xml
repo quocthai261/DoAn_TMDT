@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        style="@style/SCREEN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/purple_200"
+                android:gravity="start|bottom"
+                android:padding="20dp"
+                android:text="Cài đặt"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:text="Tài khoản"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_user_setting"
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Cài đặt hồ sơ"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <TextView
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Đổi mật khẩu"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <TextView
+                style="@style/TEXT_BOX"
+                android:id="@+id/tv_go_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Giỏ hàng của tôi"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:text="Khác"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_history_sitting"
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Lịch sử đơn hàng"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TEXT_BOX"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="Chế độ tối"
+                    style="@style/TEXT_BOX"
+                    android:textSize="22sp" />
+
+                <Switch
+                    android:id="@+id/night_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="15dp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <TextView
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Câu hỏi thường gặp"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <TextView
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Chính sách bảo mật"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/VIEW" />
+
+            <TextView
+                android:id="@+id/tv_log_out_setting"
+                style="@style/TEXT_BOX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:padding="20dp"
+                android:text="Đăng xuất"
+                android:textSize="22sp"
+                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

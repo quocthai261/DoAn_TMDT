@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#9F2C2C"
+                android:gravity="start|bottom"
+                android:padding="15dp"
+                android:text="Người dùng"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="299dp"
+                android:background="@drawable/gradient_color"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civ_prof"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/user" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Xin chào"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_Name_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Dương Quốc Thái"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/SCREEN"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_all_user_infor"
+                    style="@style/TEXT_BOX"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+                    android:gravity="center|start"
+                    android:padding="15dp"
+                    android:text="Thông tin"
+                    android:textSize="22dp" />
+
+                <View
+                    style="@style/VIEW"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_edit_user_infor"
+                    style="@style/TEXT_BOX"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+                    android:gravity="center|start"
+                    android:padding="15dp"
+                    android:text="Cập nhật thông tin"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/tv_edit_user_pass"
+                    style="@style/TEXT_BOX"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+                    android:gravity="center|start"
+                    android:padding="15dp"
+                    android:text="Thay đổi mật khẩu"
+                    android:textSize="22dp" />
+
+                <View
+                    style="@style/VIEW"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_user_suport"
+                    style="@style/TEXT_BOX"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+                    android:gravity="center|start"
+                    android:padding="15dp"
+                    android:text="Hỗ trợ"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/tv_log_out"
+                    style="@style/TEXT_BOX"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+                    android:gravity="center|start"
+                    android:padding="15dp"
+                    android:text="Đăng xuất"
+                    android:textSize="22dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

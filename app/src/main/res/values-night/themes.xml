@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TryAgain" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+    </style>
+    <style name="SCREEN">
+        <item name="android:background">#242527</item>
+    </style>
+    <style name="TEXT_BOX">
+        <item name="android:background">#242527</item>
+        <item name="android:textColor">#E5E6EA</item>
+        <item name="android:textColorHint">#7C7A7A</item>
+        <item name="drawableTint">#CCCCCC</item>
+
+    </style>
+
+    <style name="IMG_BTN">
+        <item name="android:backgroundTint">#242527</item>
+        <item name="tint">#CCCCCC</item>
+    </style>
+    <style name="BUTTON">
+        <item name="backgroundTint">#1C1C1C</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="ARROW">
+        <item name="android:drawableTint">@color/white</item>
+    </style>
+    <style name="TEXT_LOW">
+        <item name="android:background">#757575</item>
+        <item name="android:textColor">#E5E6EA</item>
+    </style>
+    <style name="TEXT_HIGH">
+        <item name="android:background">#757575</item>
+        <item name="android:textColor">#E5E6EA</item>
+    </style>
+    <style name="VIEW">
+        <item name="android:background">#757575</item>
+    </style>
+
+
+
+</resources>
