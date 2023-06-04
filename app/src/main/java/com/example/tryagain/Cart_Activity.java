@@ -3,6 +3,7 @@ package com.example.tryagain;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,10 +25,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Cart_Activity extends AppCompatActivity {
@@ -35,6 +42,7 @@ public class Cart_Activity extends AppCompatActivity {
     private ArrayList<Cart> cartArrayList;
     CartAdapter cartAdapter;
     Product product_intent;
+    FirebaseFirestore firestore;
     FirebaseAuth auth;
     FirebaseUser user;
     double get_total_price;
@@ -53,6 +61,7 @@ public class Cart_Activity extends AppCompatActivity {
         cartAdapter = new CartAdapter(cartArrayList);
         rcv_cart.setAdapter(cartAdapter);
 
+        firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -138,7 +147,6 @@ public class Cart_Activity extends AppCompatActivity {
                                 startActivity(intent);
                                 finishAndRemoveTask();
                             }
-
                             cartAdapter.notifyDataSetChanged();
                         }
                     }
@@ -148,6 +156,37 @@ public class Cart_Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+        Cart_Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (Cart cart : cartArrayList) {
+                        String path_child = cart.getId() + "_size_" + cart.getSize();
+                        firestore.collection("Hats").whereEqualTo("Id", cart.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Product product = document.toObject(Product.class);
+                                        int warehouse = Integer.parseInt(product.getWarehouse());
+                                        if (warehouse <= 0) {
+                                            Cart_Ref.child(user.getUid()).child(path_child).removeValue();
+                                            cartArrayList.clear();
+                                        }
+                                        cartAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

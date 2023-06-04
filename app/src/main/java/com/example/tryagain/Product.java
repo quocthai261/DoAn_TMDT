@@ -3,7 +3,7 @@ package com.example.tryagain;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private String Id, Name, Description, Image, Location;
+    private String Id, Name, Description, Image, Location, Warehouse;
     private int Price;
     private int typeDisplay;
     public static final int TYPE_GRID = 1, TYPE_LIST = 2;
@@ -11,12 +11,13 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String id, String name, String description, String image, String location, int price) {
+    public Product(String id, String name, String description, String image, String location, String warehouse, int price) {
         Id = id;
         Name = name;
         Description = description;
         Image = image;
         Location = location;
+        Warehouse = warehouse;
         Price = price;
     }
 
@@ -58,6 +59,14 @@ public class Product implements Serializable {
 
     public void setLocation(String location) {
         Location = location;
+    }
+
+    public String getWarehouse() {
+        return Warehouse;
+    }
+
+    public void setWarehouse(String warehouse) {
+        Warehouse = warehouse;
     }
 
     public int getPrice() {

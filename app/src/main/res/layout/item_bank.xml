@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp">
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:id="@+id/imv_logo_bank"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/vietcom" />
+
+        <TextView
+            android:id="@+id/tv_short_name_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="VietinBank"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_full_name_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Ngân hàng TMCP Công Thương Việt Nam"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

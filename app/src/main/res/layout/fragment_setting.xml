@@ -19,10 +19,10 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="85dp"
                 android:background="@color/purple_200"
                 android:gravity="start|bottom"
-                android:padding="20dp"
+                android:padding="15dp"
                 android:text="Cài đặt"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -54,12 +54,13 @@
                 style="@style/VIEW" />
 
             <TextView
+                android:id="@+id/tv_user_bank"
                 style="@style/TEXT_BOX"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="5dp"
                 android:padding="20dp"
-                android:text="Đổi mật khẩu"
+                android:text="Ngân hàng đã liên kết"
                 android:textSize="22sp"
                 app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
 
@@ -123,7 +124,8 @@
                     android:id="@+id/night_mode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="15dp" />
+                    android:padding="15dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             </LinearLayout>
 

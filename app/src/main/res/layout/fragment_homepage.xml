@@ -50,9 +50,7 @@
                         style="@style/IMG_BTN"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        app:srcCompat="@drawable/ic_cart2"
-
-                        />
+                        app:srcCompat="@drawable/ic_cart2" />
 
                     <com.nex3z.notificationbadge.NotificationBadge
                         android:id="@+id/badge"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingVertical="20dp">
+
+        <ImageView
+            android:id="@+id/imv_user_logo_bank"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/vietin" />
+
+        <TextView
+            android:id="@+id/tv_user_name_bank"
+            android:layout_width="275dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start"
+            android:layout_marginStart="10dp"
+            android:text="VietinBank"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_bank_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="5dp"
+            android:gravity="center|end"
+            android:text="*2601"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+    </LinearLayout>
+
+</RelativeLayout>

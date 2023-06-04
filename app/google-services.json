@@ -8,41 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:785899828618:android:7ff3561c65b12ad3388473",
-        "android_client_info": {
-          "package_name": "com.example.DoAnMobile"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "785899828618-i0p9gv8i4khogqlun569p8offpkhrqja.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDUwzHo_2h_Ss8qjgL6wWT9Dq6fDhesKCE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "785899828618-i0p9gv8i4khogqlun569p8offpkhrqja.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:785899828618:android:ccd0a74a25e9ca64388473",
+        "mobilesdk_app_id": "1:785899828618:android:6df24fe27efeba10388473",
         "android_client_info": {
           "package_name": "com.example.tryagain"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "785899828618-307lcbn2ul6rbchod7p3q4g23jh1i289.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tryagain",
+            "certificate_hash": "fb483cba6ebdd4d071565ad9e2e5d8440f3f8ee2"
+          }
+        },
         {
           "client_id": "785899828618-i0p9gv8i4khogqlun569p8offpkhrqja.apps.googleusercontent.com",
           "client_type": 3

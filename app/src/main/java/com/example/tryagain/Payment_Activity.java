@@ -3,12 +3,12 @@ package com.example.tryagain;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -33,58 +35,57 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class Payment_Activity extends AppCompatActivity {
-    private String price, quantity;
-    double getprice;
-    private Button btn_payment;
-    private TextView tv_user_name, tv_user_phone_number, tv_user_address, tv_price, tv_quantity, tv_total_price_product, tv_total_price_pay, tv_total_price;
+
+    private String quantity;
+    double getprice, pay;
+    private TextView tv_user_name, tv_user_phone_number, tv_user_address, tv_add_user_bank;
+    private CheckBox cb_auto, cb_momo;
     private ArrayList<Payment> paymentArrayList;
     private PaymentAdapter paymentAdapter;
-    FirebaseAuth auth;
 
+    private ArrayList<Bank_Payment> bank_paymentArrayList;
+    private Bank_Payment_Adapter bank_payment_adapter;
+
+    FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference Ref, mRef, mRef1;
-    RecyclerView rcv_payment;
-    ImageView imv_card_payment;
-    RadioGroup radioGroup;
-    RadioButton vietin_rad, vietcom_rad, mb_rad, non_rad;
+    FirebaseFirestore firestore;
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
         Intent intent = getIntent();
-        price = intent.getStringExtra("price");
+        String price = intent.getStringExtra("price");
         quantity = intent.getStringExtra("quantity");
         getprice = intent.getDoubleExtra("getprice", 0.0);
-
 
         tv_user_name = findViewById(R.id.user_name);
         tv_user_phone_number = findViewById(R.id.user_phone_number);
         tv_user_address = findViewById(R.id.user_address);
-        tv_price = findViewById(R.id.total_price);
-        tv_quantity = findViewById(R.id.quantity);
-        btn_payment = findViewById(R.id.btn_payment);
+        TextView tv_price = findViewById(R.id.total_price);
+        TextView tv_quantity = findViewById(R.id.quantity);
+        Button btn_payment = findViewById(R.id.btn_payment);
 
-
-        tv_total_price = findViewById(R.id.total_price_last);
-        tv_total_price_product = findViewById(R.id.total_price_product);
-        tv_total_price_pay = findViewById(R.id.total_price_pay);
-
+        TextView tv_total_price = findViewById(R.id.total_price_last);
+        TextView tv_total_price_product = findViewById(R.id.total_price_product);
+        TextView tv_total_price_pay = findViewById(R.id.total_price_pay);
 
         tv_price.setText(price);
         tv_quantity.setText(String.format("Tổng số tiền (%s sản phẩm):", quantity));
 
         tv_total_price_product.setText(price);
-        double pay = getprice + 30000.0;
+        pay = getprice + 30000.0;
 
         tv_total_price_pay.setText(String.format("%sđ", ConvertPriceToString(pay)));
         tv_total_price.setText(String.format("%sđ", ConvertPriceToString(pay)));
 
-
+        firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         mRef = FirebaseDatabase.getInstance().getReference().child("Cart");
@@ -105,7 +106,7 @@ public class Payment_Activity extends AppCompatActivity {
             }
         });
 
-        rcv_payment = findViewById(R.id.rcv_payment);
+        RecyclerView rcv_payment = findViewById(R.id.rcv_payment);
         rcv_payment.setLayoutManager(new LinearLayoutManager(this));
         paymentArrayList = new ArrayList<>();
         paymentAdapter = new PaymentAdapter(paymentArrayList);
@@ -113,6 +114,16 @@ public class Payment_Activity extends AppCompatActivity {
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         rcv_payment.addItemDecoration(itemDecoration);
+
+        RecyclerView rcv_bank_payment = findViewById(R.id.rcv_bank_payment);
+        rcv_bank_payment.setLayoutManager(new LinearLayoutManager(this));
+        bank_paymentArrayList = new ArrayList<>();
+        bank_payment_adapter = new Bank_Payment_Adapter(bank_paymentArrayList, bank_payment -> {
+            cb_auto.setChecked(false);
+            cb_momo.setChecked(false);
+        });
+        rcv_bank_payment.setAdapter(bank_payment_adapter);
+        rcv_bank_payment.addItemDecoration(itemDecoration);
 
         mRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -139,42 +150,98 @@ public class Payment_Activity extends AppCompatActivity {
             }
         });
 
-        btn_payment.setOnClickListener(new View.OnClickListener() {
+        Ref.child(user.getUid()).child("Bank").addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onClick(View v) {
-                Push_History_Data();
-                mRef.child(user.getUid()).removeValue();
-                paymentAdapter.notifyDataSetChanged();
-                Intent intent1 = new Intent(Payment_Activity.this, End_Process_Activity.class);
-                startActivity(intent1);
-                finishAndRemoveTask();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Bank_Payment bank_payment = dataSnapshot.getValue(Bank_Payment.class);
+                    bank_paymentArrayList.add(bank_payment);
+                }
+                bank_payment_adapter.notifyDataSetChanged();
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        btn_payment.setOnClickListener(v -> {
+            mRef.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Update_Warehouse("Hats", dataSnapshot);
+                        Update_Warehouse("Pants", dataSnapshot);
+                        Update_Warehouse("Shirts", dataSnapshot);
+                        Update_Warehouse("Shoes", dataSnapshot);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getApplicationContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Push_History_Data();
+            mRef.child(user.getUid()).removeValue();
+            paymentAdapter.notifyDataSetChanged();
+            Intent intent1 = new Intent(Payment_Activity.this, End_Process_Activity.class);
+            startActivity(intent1);
+            finishAndRemoveTask();
         });
 
-        radioGroup = findViewById(R.id.rad_group);
-        vietin_rad = findViewById(R.id.vietin_rad);
-        vietcom_rad = findViewById(R.id.vietcom_rad);
-        mb_rad = findViewById(R.id.mb_rad);
-        non_rad = findViewById(R.id.non_rad);
-        imv_card_payment = findViewById(R.id.imv_card_payment);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (vietin_rad.isChecked()) {
-                    imv_card_payment.setImageResource(R.drawable.img_vietin);
-                    imv_card_payment.setVisibility(View.VISIBLE);
-                } else if (vietcom_rad.isChecked()) {
-                    imv_card_payment.setImageResource(R.drawable.img_vietcom);
-                    imv_card_payment.setVisibility(View.VISIBLE);
-                } else if (mb_rad.isChecked()) {
-                    imv_card_payment.setImageResource(R.drawable.img_mb);
-                    imv_card_payment.setVisibility(View.VISIBLE);
-                } else {
-                    imv_card_payment.setVisibility(View.GONE);
-                }
+        cb_auto = findViewById(R.id.cb_auto);
+        cb_momo = findViewById(R.id.cb_momo);
+
+        if (bank_payment_adapter.selectedPosition != -1) {
+            cb_auto.setChecked(false);
+            cb_momo.setChecked(false);
+            Log.d("CHECCK3", "aaaaa");
+
+        }
+        cb_auto.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                cb_momo.setChecked(false);
+                bank_payment_adapter.UnSelectAll();
             }
         });
+        cb_momo.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                cb_auto.setChecked(false);
+                bank_payment_adapter.UnSelectAll();
+            }
+        });
+        tv_add_user_bank = findViewById(R.id.tv_add_user_bank);
+        tv_add_user_bank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Payment_Activity.this, Bank_Activity.class);
+                intent1.putExtra("Add_Bank", "Payment_Activity");
+                startActivity(intent1);
+            }
+        });
+    }
+
+
+    private void Update_Warehouse(String collection, DataSnapshot dataSnapshot) {
+        firestore.collection(collection)
+                .whereEqualTo("Id", dataSnapshot.child("Id")
+                        .getValue(String.class)).get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Product product = document.toObject(Product.class);
+                            int warehouse = Integer.parseInt(product.getWarehouse());
+                            int quantity = Integer.parseInt(Objects.requireNonNull(dataSnapshot.child("Quantity").getValue(String.class)));
+                            int rs = warehouse - quantity;
+                            if (rs >= 0) {
+                                firestore.collection(collection).document(document.getId()).update("Warehouse", String.valueOf(rs));
+                            } else {
+                                Toast.makeText(Payment_Activity.this, "Sản phẩm trong kho đã hết", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 
     private void Push_History_Data() {

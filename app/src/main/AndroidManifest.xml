@@ -12,6 +12,18 @@
         android:theme="@style/Theme.TryAgain"
         tools:targetApi="31">
         <activity
+            android:name=".User_Bank_Information"
+            android:exported="false" />
+        <activity
+            android:name=".Bank_User"
+            android:exported="false" />
+        <activity
+            android:name=".Add_Banks_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Bank_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Add_User_Information"
             android:exported="false" />
         <activity

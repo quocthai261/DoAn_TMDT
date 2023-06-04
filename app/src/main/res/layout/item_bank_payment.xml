@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingVertical="5dp">
+
+
+        <CheckBox
+            android:id="@+id/cb_select_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imv_logo_bank_payment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/vietin" />
+
+        <TextView
+            android:id="@+id/tv_short_name_bank_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center|start"
+            android:paddingHorizontal="10dp"
+            android:text="VietinBank"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_bank_number_payment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|end"
+            android:paddingHorizontal="15dp"
+            android:text="*2601"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

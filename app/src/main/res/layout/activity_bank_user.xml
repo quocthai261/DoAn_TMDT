@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bank_User"
+    android:background="#EDEDED">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:background="#9F2C2C"
+            android:gravity="start|bottom"
+            android:padding="15dp"
+            android:text="Tài khoản ngân hàng đã liên kết"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_user_bank_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản ngân hàng (0)"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DFDFDF" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_user_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#DFDFDF" />-->
+        <TextView
+            android:id="@+id/tv_add_user_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/baseline_add_to_photos_24"
+            android:drawablePadding="10dp"
+            android:paddingVertical="23dp"
+            android:paddingStart="13dp"
+            android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+            android:text="Thêm Tài khoản Ngân hàng liên kết"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DFDFDF" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -32,7 +32,7 @@ public class SettingFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private TextView tv_user, tv_logout, tv_history, tv_cart;
+    private TextView tv_user, tv_logout, tv_history, tv_cart, tv_user_bank;
     SharedPreferences sharedPreferences;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch night_mode;
@@ -77,6 +77,7 @@ public class SettingFragment extends Fragment {
         tv_logout = view.findViewById(R.id.tv_log_out_setting);
         tv_history = view.findViewById(R.id.tv_history_sitting);
         tv_cart = view.findViewById(R.id.tv_go_to_cart);
+        tv_user_bank = view.findViewById(R.id.tv_user_bank);
         tv_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +105,13 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Cart_Activity.class);
+                startActivity(intent);
+            }
+        });
+        tv_user_bank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Bank_User.class);
                 startActivity(intent);
             }
         });
