@@ -1,4 +1,4 @@
-![image](https://github.com/quocthai261/DoAn_TMDT/assets/91470802/93c75082-eb71-4e57-9a43-7e37d1557287)1.Tên dự án: Ứng dụng mua hàng trực tuyến.
+1.Tên dự án: Ứng dụng mua hàng trực tuyến.
 
 2.Mô tả dự án
 
