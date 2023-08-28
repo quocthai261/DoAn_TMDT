@@ -6,7 +6,7 @@
 
 • Dự án được thực hiện với mục đích tự học cũng như trao dồi thêm kinh nghiệm làm việc với Android (Java), Firebase.
 
-• Công nghệ sử dụng:
+• Đường dẫn tải ứng dụng trải nghiệm: https://drive.google.com/file/d/1RVz7lYo-8GS45cnDiO6UyfgUDdB1SqZT/view?usp=sharing
 
 3.Các tính năng
 
